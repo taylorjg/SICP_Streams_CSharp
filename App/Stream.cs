@@ -5,18 +5,21 @@ namespace App
     public sealed class Stream
     {
         private Stream()
+            : this(null, null)
         {
+        }
+
+        private Stream(HeadHolder headHolderHolder, Func<Stream> delayedStream)
+        {
+            _headHolder = headHolderHolder;
+            _delayedStream = delayedStream;
         }
 
         public static Stream EmptyStream = new Stream();
 
         public static Stream ConsStream(int head, Func<Stream> delayedStream)
         {
-            return new Stream
-                {
-                    _head = new ValueHolder(head),
-                    _delayedStream = delayedStream
-                };
+            return new Stream(new HeadHolder(head), delayedStream);
         }
 
         public bool IsEmpty { get { return this == EmptyStream; } }
@@ -25,8 +28,8 @@ namespace App
         {
             get
             {
-                if (_head == null) throw new InvalidOperationException("StreamCar of empty stream.");
-                return _head.Value;
+                if (_headHolder == null) throw new InvalidOperationException("StreamCar of empty stream.");
+                return _headHolder.Head;
             }
         }
 
@@ -39,17 +42,21 @@ namespace App
             }
         }
 
-        private ValueHolder _head;
-        private Func<Stream> _delayedStream;
+        private readonly HeadHolder _headHolder;
+        private readonly Func<Stream> _delayedStream;
 
-        private class ValueHolder
+        private class HeadHolder
         {
-            public ValueHolder(int value)
+            public HeadHolder(int head)
             {
-                Value = value;
+                _head = head;
             }
 
-            public int Value { get; private set; }
+            public int Head {
+                get { return _head; }
+            }
+
+            private readonly int _head;
         }
     }
 }
