@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Code
 {
@@ -47,6 +49,19 @@ namespace Code
             if (s.IsEmpty) return s;
             if (pred(s.StreamCar)) return Stream.ConsStream(s.StreamCar, () => StreamFilter(pred, s.StreamCdr));
             return StreamFilter(pred, s.StreamCdr);
+        }
+
+        public static Stream StreamMap(Func<IEnumerable<int>, int> proc, params Stream[] streams)
+        {
+            if (streams[0].IsEmpty) return Stream.EmptyStream;
+            return Stream.ConsStream(
+                proc(streams.Select(s => s.StreamCar)),
+                () => StreamMap(proc, streams.Select(s => s.StreamCdr).ToArray()));
+        }
+
+        public static Stream AddStreams(Stream s1, Stream s2)
+        {
+            return StreamMap(xs => xs.Sum(), s1, s2);
         }
     }
 }
