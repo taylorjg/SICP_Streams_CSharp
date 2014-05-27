@@ -4,22 +4,16 @@ namespace App
 {
     public sealed class Stream
     {
-        private Stream()
-            : this(null, null)
+        private Stream(Tuple<int, Func<Stream>> pair)
         {
+            _pair = pair;
         }
 
-        private Stream(HeadHolder headHolderHolder, Func<Stream> delayedStream)
-        {
-            _headHolder = headHolderHolder;
-            _delayedStream = delayedStream;
-        }
-
-        public static Stream EmptyStream = new Stream();
+        public static Stream EmptyStream = new Stream(null);
 
         public static Stream ConsStream(int head, Func<Stream> delayedStream)
         {
-            return new Stream(new HeadHolder(head), delayedStream);
+            return new Stream(Tuple.Create(head, delayedStream));
         }
 
         public bool IsEmpty { get { return this == EmptyStream; } }
@@ -28,8 +22,8 @@ namespace App
         {
             get
             {
-                if (_headHolder == null) throw new InvalidOperationException("StreamCar of empty stream.");
-                return _headHolder.Head;
+                PerformEmptyCheck("StreamCar");
+                return _pair.Item1;
             }
         }
 
@@ -37,26 +31,16 @@ namespace App
         {
             get
             {
-                if (_delayedStream == null) throw new InvalidOperationException("StreamCdr of empty stream.");
-                return _delayedStream();
+                PerformEmptyCheck("StreamCdr");
+                return _pair.Item2();
             }
         }
 
-        private readonly HeadHolder _headHolder;
-        private readonly Func<Stream> _delayedStream;
-
-        private class HeadHolder
+        private void PerformEmptyCheck(string functionName)
         {
-            public HeadHolder(int head)
-            {
-                _head = head;
-            }
-
-            public int Head {
-                get { return _head; }
-            }
-
-            private readonly int _head;
+            if (_pair == null) throw new InvalidOperationException(string.Format("{0} called on empty stream.", functionName));
         }
+
+        private readonly Tuple<int, Func<Stream>> _pair;
     }
 }
