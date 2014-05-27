@@ -63,5 +63,20 @@ namespace Code
         {
             return StreamMap(xs => xs.Sum(), s1, s2);
         }
+
+        public static Stream MulStreams(Stream s1, Stream s2)
+        {
+            return StreamMap(xs => xs.Aggregate(1, (x, y) => x * y), s1, s2);
+        }
+
+        public static Stream PartialSums(Stream s)
+        {
+            return Stream.ConsStream(s.StreamCar, () => StreamUtils.AddStreams(s.StreamCdr, PartialSums(s)));
+        }
+
+        public static Stream IntegrateSeries(Stream s)
+        {
+            return StreamMap(xs => { var arr = xs.ToArray(); return arr[0] / arr[1]; }, s, Streams.Integers());
+        }
     }
 }

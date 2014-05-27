@@ -42,6 +42,23 @@
             return Sieve(IntegersStartingFrom(2));
         }
 
+        public static Stream Primes2()
+        {
+            return Stream.ConsStream(2, () => StreamUtils.StreamFilter(IsPrime, IntegersStartingFrom(3)));
+        }
+
+        private static bool IsPrime(int n)
+        {
+            return IsPrimeIter(n, Primes2());
+        }
+
+        private static bool IsPrimeIter(int n, Stream ps)
+        {
+            if (ps.StreamCar * ps.StreamCar > n) return true;
+            if (IsDivisible(n, ps.StreamCar)) return false;
+            return IsPrimeIter(n, ps.StreamCdr);
+        }
+
         private static Stream Sieve(Stream s)
         {
             return Stream.ConsStream(
@@ -56,6 +73,11 @@
         {
             if (low > high) return Stream.EmptyStream;
             return Stream.ConsStream(low, () => StreamEnumerateInterval(low + 1, high));
+        }
+
+        public static Stream Factorials()
+        {
+            return Stream.ConsStream(1, () => StreamUtils.MulStreams(Integers(), Factorials()));
         }
     }
 }

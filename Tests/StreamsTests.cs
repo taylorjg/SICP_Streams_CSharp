@@ -51,6 +51,13 @@ namespace Tests
         }
 
         [Test]
+        public void TestPrimes2()
+        {
+            var actual = Streams.Primes2().ToEnumerable().Take(20).ToList();
+            Assert.That(actual, Is.EqualTo(new[] {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71}));
+        }
+
+        [Test]
         public void TestStreamEnumerateInterval()
         {
             var actual = Streams.StreamEnumerateInterval(2, 6).ToEnumerable().Take(20).ToList();

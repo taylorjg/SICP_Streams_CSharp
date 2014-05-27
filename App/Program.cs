@@ -21,8 +21,12 @@ namespace App
             StreamUtils.DisplayStreamN(Streams.NoSevens(), 30);
             StreamUtils.DisplayStreamN(Streams.Fibs(), 25);
             StreamUtils.DisplayStreamN(Streams.Primes(), 25);
+            StreamUtils.DisplayStreamN(Streams.Primes2(), 25);
             StreamUtils.DisplayStreamN(Streams.StreamEnumerateInterval(5, 12), 25);
             StreamUtils.DisplayStreamN(StreamUtils.AddStreams(Streams.Integers(), Streams.Integers()), 20);
+            StreamUtils.DisplayStreamN(Streams.Factorials(), 12);
+            StreamUtils.DisplayStreamN(StreamUtils.PartialSums(Streams.Integers()), 12);
+            StreamUtils.DisplayStreamN(StreamUtils.IntegrateSeries(Streams.Integers()), 12);
         }
     }
 }
