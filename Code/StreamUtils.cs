@@ -41,5 +41,12 @@ namespace Code
                 Console.WriteLine();
             }
         }
+
+        public static Stream StreamFilter(Func<int, bool> pred, Stream s)
+        {
+            if (s.IsEmpty) return s;
+            if (pred(s.StreamCar)) return Stream.ConsStream(s.StreamCar, () => StreamFilter(pred, s.StreamCdr));
+            return StreamFilter(pred, s.StreamCdr);
+        }
     }
 }
