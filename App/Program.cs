@@ -21,6 +21,7 @@ namespace App
             StreamUtils.DisplayStreamN(Streams.NoSevens(), 30);
             StreamUtils.DisplayStreamN(Streams.Fibs(), 25);
             StreamUtils.DisplayStreamN(Streams.Primes(), 25);
+            StreamUtils.DisplayStreamN(Streams.StreamEnumerateInterval(5, 12), 25);
         }
     }
 }

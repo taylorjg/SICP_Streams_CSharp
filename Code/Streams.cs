@@ -51,5 +51,11 @@
                         x => !IsDivisible(x, s.StreamCar),
                         s.StreamCdr)));
         }
+
+        public static Stream StreamEnumerateInterval(int low, int high)
+        {
+            if (low > high) return Stream.EmptyStream;
+            return Stream.ConsStream(low, () => StreamEnumerateInterval(low + 1, high));
+        }
     }
 }
