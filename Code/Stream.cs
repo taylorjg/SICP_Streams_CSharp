@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace App
+namespace Code
 {
     public sealed class Stream
     {
