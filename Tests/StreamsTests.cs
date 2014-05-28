@@ -63,5 +63,54 @@ namespace Tests
             var actual = Streams.StreamEnumerateInterval(2, 6).ToEnumerable().Take(20).ToList();
             Assert.That(actual, Is.EqualTo(new[] {2, 3, 4, 5, 6}));
         }
+
+        [Test]
+        public void TestExpSeries()
+        {
+            var actual = Streams.ExpSeries().ToEnumerable().Take(6).ToList();
+            Assert.That(actual, Is.EqualTo(new[]
+                {
+                    1d,
+                    1d,
+                    1d / 2d,
+                    1d / (3d * 2d),
+                    1d / (4d * 3d * 2d),
+                    1d / (5d * 4d * 3d * 2d)
+                }));
+        }
+
+        [Test]
+        public void TestCosineSeries()
+        {
+            var actual = Streams.CosineSeries().ToEnumerable().Take(8).ToList();
+            Assert.That(actual, Is.EqualTo(new[]
+                {
+                    +1d,
+                    0d,
+                    -(1d / 2d),
+                    0d,
+                    +(1d / (4d * 3d * 2d)),
+                    0d,
+                    -(1d / (6d * 5d * 4d * 3d * 2d)),
+                    0d
+                }));
+        }
+
+        [Test]
+        public void TestSineSeries()
+        {
+            var actual = Streams.SineSeries().ToEnumerable().Take(8).ToList();
+            Assert.That(actual, Is.EqualTo(new[]
+                {
+                    0d,
+                    +1d,
+                    0d,
+                    -(1d / (3d * 2d)),
+                    0d,
+                    +(1d / (5d* 4d * 3d * 2d)),
+                    0d,
+                    -(1d / (7d * 6d * 5d* 4d * 3d * 2d))
+                }));
+        }
     }
 }

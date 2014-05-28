@@ -94,5 +94,20 @@
         {
             return Stream<int>.ConsStream(1, () => StreamUtils.MulStreams(Integers(), Factorials()));
         }
+
+        public static Stream<double> ExpSeries()
+        {
+            return Stream<double>.ConsStream(1d, () => StreamUtils.IntegrateSeries(ExpSeries()));
+        }
+
+        public static Stream<double> CosineSeries()
+        {
+            return Stream<double>.ConsStream(1d, () => StreamUtils.NegateStream(StreamUtils.IntegrateSeries(SineSeries())));
+        }
+
+        public static Stream<double> SineSeries()
+        {
+            return Stream<double>.ConsStream(0d, () => StreamUtils.IntegrateSeries(CosineSeries()));
+        }
     }
 }

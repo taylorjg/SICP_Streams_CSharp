@@ -69,6 +69,16 @@ namespace Code
             return StreamMap(xs => xs.Aggregate(1, (x, y) => x * y), s1, s2);
         }
 
+        public static Stream<int> NegateStream(Stream<int> s)
+        {
+            return StreamMap(xs => -xs.First(), s);
+        }
+
+        public static Stream<double> NegateStream(Stream<double> s)
+        {
+            return StreamMap(xs => -xs.First(), s);
+        }
+
         public static Stream<int> PartialSums(Stream<int> s)
         {
             return Stream<int>.ConsStream(s.StreamCar, () => AddStreams(s.StreamCdr, PartialSums(s)));

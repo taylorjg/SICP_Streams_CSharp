@@ -36,6 +36,9 @@ namespace App
             StreamUtils.DisplayStreamN(Streams.Factorials(), 12);
             StreamUtils.DisplayStreamN(StreamUtils.PartialSums(Streams.Integers()), 12);
             StreamUtils.DisplayStreamN(StreamUtils.IntegrateSeries(Streams.OnesAsDoubles()), 12);
+            StreamUtils.DisplayStreamN(Streams.ExpSeries(), 12);
+            StreamUtils.DisplayStreamN(Streams.CosineSeries(), 8);
+            StreamUtils.DisplayStreamN(Streams.SineSeries(), 8);
         }
     }
 }

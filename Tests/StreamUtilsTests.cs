@@ -38,6 +38,24 @@ namespace Tests
         }
 
         [Test]
+        public void TestNegateStreamOfIntegers()
+        {
+            var actual = StreamUtils.NegateStream(Streams.Integers())
+                                    .ToEnumerable()
+                                    .Take(5);
+            Assert.That(actual, Is.EqualTo(new[] {-1, -2, -3, -4, -5}));
+        }
+
+        [Test]
+        public void TestNegateStreamOfDoubles()
+        {
+            var actual = StreamUtils.NegateStream(Streams.Doubles())
+                                    .ToEnumerable()
+                                    .Take(5);
+            Assert.That(actual, Is.EqualTo(new[] {-1d, -2d, -3d, -4d, -5d}));
+        }
+
+        [Test]
         public void TestIntegrateSeries()
         {
             var actual = StreamUtils.IntegrateSeries(Streams.OnesAsDoubles())
