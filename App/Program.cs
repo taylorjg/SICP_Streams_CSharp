@@ -37,8 +37,14 @@ namespace App
             StreamUtils.DisplayStreamN(StreamUtils.PartialSums(Streams.Integers()), 12);
             StreamUtils.DisplayStreamN(StreamUtils.IntegrateSeries(Streams.OnesAsDoubles()), 12);
             StreamUtils.DisplayStreamN(Streams.ExpSeries(), 12);
-            StreamUtils.DisplayStreamN(Streams.CosineSeries(), 8);
-            StreamUtils.DisplayStreamN(Streams.SineSeries(), 8);
+            StreamUtils.DisplayStreamN(Streams.CosineSeries(), 10);
+            StreamUtils.DisplayStreamN(Streams.SineSeries(), 10);
+
+            StreamUtils.DisplayStreamN(
+                StreamUtils.AddStreams(
+                    StreamUtils.MulSeries(Streams.CosineSeries(), Streams.CosineSeries()),
+                    StreamUtils.MulSeries(Streams.SineSeries(), Streams.SineSeries())),
+                4);
         }
     }
 }

@@ -64,9 +64,19 @@ namespace Code
             return StreamMap(xs => xs.Aggregate(0, (x, y) => x + y), s1, s2);
         }
 
+        public static Stream<double> AddStreams(Stream<double> s1, Stream<double> s2)
+        {
+            return StreamMap(xs => xs.Aggregate(0d, (x, y) => x + y), s1, s2);
+        }
+
         public static Stream<int> MulStreams(Stream<int> s1, Stream<int> s2)
         {
             return StreamMap(xs => xs.Aggregate(1, (x, y) => x * y), s1, s2);
+        }
+
+        public static Stream<double> MulStreams(Stream<double> s1, Stream<double> s2)
+        {
+            return StreamMap(xs => xs.Aggregate(1d, (x, y) => x * y), s1, s2);
         }
 
         public static Stream<int> NegateStream(Stream<int> s)
@@ -77,6 +87,11 @@ namespace Code
         public static Stream<double> NegateStream(Stream<double> s)
         {
             return StreamMap(xs => -xs.First(), s);
+        }
+
+        public static Stream<double> ScaleStream(Stream<double> s, double factor)
+        {
+            return StreamMap(xs => xs.First() * factor, s);
         }
 
         public static Stream<int> PartialSums(Stream<int> s)
@@ -93,6 +108,15 @@ namespace Code
                     var d = arr[1];
                     return n / d;
                 }, s, Streams.Doubles());
+        }
+
+        public static Stream<double> MulSeries(Stream<double> s1, Stream<double> s2)
+        {
+            return Stream<double>.ConsStream(
+                s1.StreamCar * s2.StreamCar,
+                () => AddStreams(
+                    ScaleStream(s2.StreamCdr, s1.StreamCar),
+                    MulSeries(s1.StreamCdr, s2)));
         }
     }
 }

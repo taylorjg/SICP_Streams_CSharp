@@ -56,6 +56,22 @@ namespace Tests
         }
 
         [Test]
+        public void TestScaleStreamOfDoubles()
+        {
+            var actual = StreamUtils.ScaleStream(Streams.Doubles(), 2d)
+                                    .ToEnumerable()
+                                    .Take(5);
+            Assert.That(actual, Is.EqualTo(new[]
+                {
+                    1d * 2d,
+                    2d * 2d,
+                    3d * 2d,
+                    4d * 2d,
+                    5d * 2d
+                }));
+        }
+
+        [Test]
         public void TestIntegrateSeries()
         {
             var actual = StreamUtils.IntegrateSeries(Streams.OnesAsDoubles())
