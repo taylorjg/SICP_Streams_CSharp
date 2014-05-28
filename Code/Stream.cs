@@ -2,23 +2,28 @@ using System;
 
 namespace Code
 {
-    public sealed class Stream
+    public sealed class Stream<T>
     {
-        private Stream(Tuple<int, Func<Stream>> pair)
+        private Stream()
+        {
+            _pair = null;
+        }
+
+        private Stream(Tuple<T, Func<Stream<T>>> pair)
         {
             _pair = pair;
         }
 
-        public static Stream EmptyStream = new Stream(null);
+        public static Stream<T> EmptyStream = new Stream<T>();
 
-        public static Stream ConsStream(int head, Func<Stream> delayedStream)
+        public static Stream<T> ConsStream(T head, Func<Stream<T>> delayedStream)
         {
-            return new Stream(Tuple.Create(head, delayedStream));
+            return new Stream<T>(Tuple.Create(head, delayedStream));
         }
 
         public bool IsEmpty { get { return this == EmptyStream; } }
 
-        public int StreamCar
+        public T StreamCar
         {
             get
             {
@@ -27,7 +32,7 @@ namespace Code
             }
         }
 
-        public Stream StreamCdr
+        public Stream<T> StreamCdr
         {
             get
             {
@@ -41,6 +46,6 @@ namespace Code
             if (_pair == null) throw new InvalidOperationException(string.Format("{0} called on empty stream.", functionName));
         }
 
-        private readonly Tuple<int, Func<Stream>> _pair;
+        private readonly Tuple<T, Func<Stream<T>>> _pair;
     }
 }

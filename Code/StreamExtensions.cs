@@ -4,7 +4,7 @@ namespace Code
 {
     public static class StreamExtensions
     {
-        public static IEnumerable<int> ToEnumerable(this Stream s)
+        public static IEnumerable<T> ToEnumerable<T>(this Stream<T> s)
         {
             var currentStream = s;
             for (;;)

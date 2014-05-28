@@ -25,7 +25,7 @@ namespace Tests
             var actual = StreamUtils.AddStreams(Streams.Integers(), Streams.Integers())
                                     .ToEnumerable()
                                     .Take(5);
-            Assert.That(actual, Is.EqualTo(new[] {1 + 1, 2 + 2, 3 + 3, 4 + 4, 5 + 5}));
+            Assert.That(actual, Is.EqualTo(new[] { 1 + 1, 2 + 2, 3 + 3, 4 + 4, 5 + 5 }));
         }
 
         [Test]
@@ -34,7 +34,23 @@ namespace Tests
             var actual = StreamUtils.MulStreams(Streams.Integers(), Streams.Integers())
                                     .ToEnumerable()
                                     .Take(5);
-            Assert.That(actual, Is.EqualTo(new[] {1 * 1, 2 * 2, 3 * 3, 4 * 4, 5 * 5}));
+            Assert.That(actual, Is.EqualTo(new[] { 1 * 1, 2 * 2, 3 * 3, 4 * 4, 5 * 5 }));
+        }
+
+        [Test]
+        public void TestIntegrateSeries()
+        {
+            var actual = StreamUtils.IntegrateSeries(Streams.OnesDoubles())
+                                    .ToEnumerable()
+                                    .Take(5);
+            Assert.That(actual, Is.EqualTo(new[]
+                {
+                    1d / 1d,
+                    1d / 2d,
+                    1d / 3d,
+                    1d / 4d,
+                    1d / 5d
+                }));
         }
     }
 }
