@@ -10,7 +10,7 @@ namespace Tests
         [Test]
         public void TestOnes()
         {
-            var actual = Streams.OnesIntegers().ToEnumerable().Take(10).ToList();
+            var actual = Streams.OnesAsIntegers().ToEnumerable().Take(10).ToList();
             Assert.That(actual, Has.Count.EqualTo(10));
             Assert.That(actual, Has.All.Matches(Is.EqualTo(1)));
         }

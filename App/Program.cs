@@ -23,7 +23,7 @@ namespace App
             StreamUtils.DisplayStream(s2);
             StreamUtils.DisplayStreamN(s2, 2);
 
-            StreamUtils.DisplayStreamN(Streams.OnesIntegers(), 10);
+            StreamUtils.DisplayStreamN(Streams.OnesAsIntegers(), 10);
             StreamUtils.DisplayStreamN(Streams.IntegersStartingFrom(15), 10);
             StreamUtils.DisplayStreamN(Streams.Integers(), 10);
             StreamUtils.DisplayStreamN(Streams.Doubles(), 10);
@@ -35,7 +35,7 @@ namespace App
             StreamUtils.DisplayStreamN(StreamUtils.AddStreams(Streams.Integers(), Streams.Integers()), 20);
             StreamUtils.DisplayStreamN(Streams.Factorials(), 12);
             StreamUtils.DisplayStreamN(StreamUtils.PartialSums(Streams.Integers()), 12);
-            StreamUtils.DisplayStreamN(StreamUtils.IntegrateSeries(Streams.OnesDoubles()), 12);
+            StreamUtils.DisplayStreamN(StreamUtils.IntegrateSeries(Streams.OnesAsDoubles()), 12);
         }
     }
 }

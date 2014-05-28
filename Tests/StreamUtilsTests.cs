@@ -40,7 +40,7 @@ namespace Tests
         [Test]
         public void TestIntegrateSeries()
         {
-            var actual = StreamUtils.IntegrateSeries(Streams.OnesDoubles())
+            var actual = StreamUtils.IntegrateSeries(Streams.OnesAsDoubles())
                                     .ToEnumerable()
                                     .Take(5);
             Assert.That(actual, Is.EqualTo(new[]

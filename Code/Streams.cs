@@ -2,14 +2,14 @@
 {
     public class Streams
     {
-        public static Stream<int> OnesIntegers()
+        public static Stream<int> OnesAsIntegers()
         {
-            return Stream<int>.ConsStream(1, OnesIntegers);
+            return Stream<int>.ConsStream(1, OnesAsIntegers);
         }
 
-        public static Stream<double> OnesDoubles()
+        public static Stream<double> OnesAsDoubles()
         {
-            return Stream<double>.ConsStream(1d, OnesDoubles);
+            return Stream<double>.ConsStream(1d, OnesAsDoubles);
         }
 
         public static Stream<int> IntegersStartingFrom(int n)
