@@ -9,17 +9,22 @@ namespace Code
             _pair = null;
         }
 
-        private Stream(Tuple<T, Func<Stream<T>>> pair)
+        private Stream(T head, Func<Stream<T>> delayedStream)
         {
-            _pair = pair;
+            _pair = Tuple.Create(head, delayedStream);
         }
 
-        public static Stream<T> EmptyStream = new Stream<T>();
+        public static Stream<T> ConsStream(T head)
+        {
+            return new Stream<T>(head, () => EmptyStream);
+        }
 
         public static Stream<T> ConsStream(T head, Func<Stream<T>> delayedStream)
         {
-            return new Stream<T>(Tuple.Create(head, delayedStream));
+            return new Stream<T>(head, delayedStream);
         }
+
+        public static Stream<T> EmptyStream = new Stream<T>();
 
         public bool IsEmpty { get { return this == EmptyStream; } }
 
