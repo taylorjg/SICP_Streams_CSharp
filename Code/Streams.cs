@@ -109,5 +109,22 @@
         {
             return Stream<double>.ConsStream(0d, () => StreamUtils.IntegrateSeries(CosineSeries()));
         }
+
+        public static Stream<double> TangentSeries()
+        {
+            return StreamUtils.DivSeries(SineSeries(), CosineSeries());
+        }
+
+        private static Stream<double> PiSummands(int n)
+        {
+            return Stream<double>.ConsStream(
+                1d / n,
+                () => StreamUtils.ScaleStream(PiSummands(n + 2), -1d));
+        }
+
+        public static Stream<double> PiStream()
+        {
+            return StreamUtils.ScaleStream(StreamUtils.PartialSums(PiSummands(1)), 4d);
+        }
     }
 }

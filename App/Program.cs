@@ -39,12 +39,30 @@ namespace App
             StreamUtils.DisplayStreamN(Streams.ExpSeries(), 12);
             StreamUtils.DisplayStreamN(Streams.CosineSeries(), 10);
             StreamUtils.DisplayStreamN(Streams.SineSeries(), 10);
+            StreamUtils.DisplayStreamN(Streams.TangentSeries(), 10);
 
             StreamUtils.DisplayStreamN(
                 StreamUtils.AddStreams(
                     StreamUtils.MulSeries(Streams.CosineSeries(), Streams.CosineSeries()),
                     StreamUtils.MulSeries(Streams.SineSeries(), Streams.SineSeries())),
                 4);
+
+            StreamUtils.DisplayStreamN(StreamUtils.InvertUnitSeries(Streams.OnesAsIntegers()), 10);
+            StreamUtils.DisplayStreamN(StreamUtils.InvertUnitSeries(Streams.OnesAsDoubles()), 10);
+            StreamUtils.DisplayStreamN(StreamUtils.InvertUnitSeries(Streams.ExpSeries()), 10);
+
+            StreamUtils.DisplayStreamN(
+                StreamUtils.MulStreams(
+                    Streams.Integers(),
+                    StreamUtils.InvertUnitSeries(Streams.Integers())),
+                10);
+
+            StreamUtils.DisplayStreamN(StreamUtils.DivSeries(Streams.OnesAsIntegers(), Streams.OnesAsIntegers()), 10);
+            StreamUtils.DisplayStreamN(StreamUtils.DivSeries(Streams.OnesAsDoubles(), Streams.OnesAsDoubles()), 10);
+
+            StreamUtils.DisplayStreamN(Streams.PiStream(), 10);
+            StreamUtils.DisplayStreamN(StreamUtils.EulerTransform(Streams.PiStream()), 10);
+            StreamUtils.DisplayStreamN(StreamUtils.AcceleratedSequence(StreamUtils.EulerTransform, Streams.PiStream()), 10);
         }
     }
 }

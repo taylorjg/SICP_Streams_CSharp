@@ -112,5 +112,21 @@ namespace Tests
                     -(1d / (7d * 6d * 5d* 4d * 3d * 2d))
                 }));
         }
+
+        [Test]
+        public void TestTangentSeries()
+        {
+            const double tolerance = 0.0000000000000001d;
+            var actual = Streams.TangentSeries().ToEnumerable().Take(8).ToList();
+            Assert.That(actual, Has.Count.EqualTo(8));
+            Assert.That(actual[0], Is.EqualTo(0d));
+            Assert.That(actual[1], Is.EqualTo(1d).Within(tolerance));
+            Assert.That(actual[2], Is.EqualTo(0d));
+            Assert.That(actual[3], Is.EqualTo(1d / 3d).Within(tolerance));
+            Assert.That(actual[4], Is.EqualTo(0d));
+            Assert.That(actual[5], Is.EqualTo(2d / 15d).Within(tolerance));
+            Assert.That(actual[6], Is.EqualTo(0d));
+            Assert.That(actual[7], Is.EqualTo(17d / 315d).Within(tolerance));
+        }
     }
 }
